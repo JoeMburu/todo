@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +20,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container">        
         <h3 class="pt-5 text-center">Django ToDo App</h3>
         <div class="row">
             <h4>My Day</h4>
@@ -31,10 +32,10 @@
                     <div class="card-body">
                         {{ task.title }}
                         <span style="position: relative; float: right;">
-                            <a class="btn btn-success"><i class="fa fa-check"></i> Mark as Done</a>
-                            <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                            <a class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                        </span>
+                            <a href="{% url 'completeTask' task.id %}" class="btn btn-success"><i class="fa fa-check"></i> Mark as Done</a>
+                            <a href="{% url 'deleteTask' task.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                            <a href="{% url 'editTask' task.id %}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                        </span>                       
                     </div>
                 </div>
                 {% endfor %}
@@ -46,6 +47,10 @@
                 <div class="card m-1">
                     <div class="card-body">
                         {{ task.title }}
+                        <span style="position: relative; float: right;">
+                            <a href="{% url 'markTaskAsUndone' task.id %}" class="btn btn-danger"><i class="fa fa-times"></i> Mark as Undone</a>
+                          
+                        </span>
                     </div>
                 </div>
                 {% endfor %}
@@ -66,5 +71,6 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>
